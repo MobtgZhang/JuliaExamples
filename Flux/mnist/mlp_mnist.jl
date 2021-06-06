@@ -19,7 +19,6 @@ function getdata(args,device)
 
     # One-hot-encode the labels
     ytrain, ytest = onehotbatch(ytrain, 0:9), onehotbatch(ytest, 0:9)
-
     # Create DataLoaders (mini-batch iterators)
 
     train_loader = DataLoader(xtrain,ytrain, batchsize=args.batchsize, shuffle=true)
@@ -40,7 +39,6 @@ function loss_and_accuracy(data_loader,model,device)
     for (x,y) in data_loader
         x,y = device(x),device(y)
         y_pred = model(x)
-        loss(x,y) = mean()
         ls += logitcrossentropy(model(x),y)
         acc += sum(onecold(cpu(model(x))) .== onecold(cpu(y)))
         num += size(x,2)
